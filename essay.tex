@@ -1,0 +1,102 @@
+\documentclass[12pt,draft]{article}
+
+\include{prelude}
+
+\begin{document}
+\maketitle
+\begin{abstract}  % Does this go in the prelude or after the document begins?
+\end{abstract}
+
+
+\section{Introduction}
+
+
+\section{Current Methods}
+% Methods built on process structure trees
+
+
+\subsection{SecSY}
+% From the SecSY paper
+SecSY\todo{CITE} is a tool produced with the intention of solving a lack of
+``mechanisms for business process security monitoring and auditing''. In
+particular, the work addresses the need for controlled log generation for
+testing purposes with regards flexible and varying processes which exhibit
+non-compliance. The authors' rationale is that, as the information systems
+community increasingly develop tools which can test for certain traits in an
+event log --- such as security policy violation --- their testing requires
+suitable test data. A set of logs which exhibit the sought property, and a set
+which do not, should be producable from a specification of ideal behaviour.
+\par
+
+The tool produces event logs exhibiting arbitrary properties which one might
+want to observe in a controlled manner. It does this by executing a provided
+process specification according to a ``context'', and recording the associated
+event log (the simulation's ``trace''). The trace is then edited via a set of
+transformers. The transformers used are well documented in \todo{CITE}, but
+roughly correspond to switching gateway types, swapping order of task execution,
+editing associated actors to introduce violation of authenatication, and editing
+associated actors so that the same actor did not execute all of a set of
+actions.
+\par
+
+The authors note that SecSY is ``capable of producing log files of industrial
+complexity'', and that these logs are readily available to be used in testing by
+the process mining community. The tool's evaluation affirms this by noting the
+tool's runtime and that the transformers they detail are ``effective''. This
+does not guarantee that transformers produce realistic data, however. We can
+surmise that a transformer-based approach can be reliably and efficiently
+implemented, but have no guarantees as to the \emph{realism} of the log it might
+produce.
+\par
+
+We can expect that such a method would produce a realistic model only with
+significant effort and changes. In the real world, logs produced with certain
+pieces of variance ought to exhibit the impact of that variance on the decisions
+made by agents in later stages of a process. Put another way, variance in the
+real world produces state changes which have an effect on future decisions
+actors might make. Post-processing on event logs would need to take this state
+into account to predict the ``knock-on effects'' of behavioural variance, and
+each sequential effect the initial change would make on state may have
+cumulative impacts on the overall workflow execution.
+\par
+
+Therefore, while this method shows initial promise, amending it to satisfy the
+requirement of realism in a generated event log seems intractable.
+\par
+
+\subsection{IBM paper}  % What's the name of this actual technique? TODO: Re-read the paper...
+
+\subsection{Limitations of these Approach}
+The limitation of this approach is evident when we consider what the impact of
+contingent behaviour is on certain details of the world they are intended to
+simulate. In the real world, the changes applied in ordinary process structure
+tree models fail to represent how changes at one stage in a procedure impact
+future behaviour.\par
+
+A toy example of the real world might be a worker following a simple workflow on
+a factory floor. The worker's workflow can be represented through a plethora of
+standard modelling techniques, and the process fits the block-structured
+workflow modelling required for analysis as a Process Structure Tree. A piece of
+contingent behaviour which could be represented via these models might be the
+actor executing the workflow being distracted.\par
+
+Existing techniques, such as \todo{CITE}, represent these changes as an
+amendment to the event log produced by a simulation from a Process Structure
+Tree. \par
+
+
+
+
+\section{Dynamic Fuzzing}
+
+
+\section{Nuances and Definitions}
+
+
+
+\section{BPMN representations in Python}
+
+
+
+
+\end{document}
