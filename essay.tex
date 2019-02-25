@@ -4,11 +4,84 @@
 
 \begin{document}
 \maketitle
-\begin{abstract}  % Does this go in the prelude or after the document begins?
+\begin{abstract}
+Science requires data. Some work exists toward producing synthetic data sets
+for testing information systems in a controlled way, but never addresses
+whether the data sets are representative of the real world. To produce data
+sets that can plausibly be described as ``realistic'', we note that it is
+necessary to account for unexpected behaviours which produce noise in
+empirically sourced data sets. We present a novel approach to simulation,
+where variance in behaviour is captured as a component of a model, and used to
+introduce errors in the behaviour represented by such a model. These possibly
+erroneous behaviours are simulated, introducing realistic noise to generated
+data sets. To achieve this, a new paradigm for the construction of business
+process models is introduced. Implementation of models under this new paradigm
+is detailed in full. The paradigm lends a new perspective on modelling with
+impacts on the broader BPMDS community, and this future work is discussed.
 \end{abstract}
 
 
 \section{Introduction}
+The verification of scientific work is a process which relies on the
+availability of test data which is controlled and abundant.
+\par
+
+For many fields, and particularly for traditional scientific process, such data
+is readily available. Simple physical data points, such as the velocity or mass
+of the subject of study, are easily measured, in turn providing ample
+high-quality data sets. As subjects of study become more complex, however, data
+collection becomes an increasingly complex task. Business process modelling is
+one example of the study of a complex, difficult-to-measure system.
+\par
+
+Business process modelling in particular has a unique set of challenges
+available in collecting data: high-quality data sets are especially difficult to
+produce, and those who do produce them are typically the businesses who manage
+the process subject to analysis. This means that high-quality collected data
+sets tend to be silo-ed into industry, and are not publicly available.
+\par
+
+The affect of this situation is to handicap available scientific process in a
+variety of fields, notably business process modelling. Verification of tooling
+is difficult, and evaluation rarely makes use of available test data, because
+such data cannot feasibly be attained in an academic research context without
+very close ties to industry. Even with industrial ties, this situation poses an
+issue, as the scientific process depends on the notion of reproduction.
+Without available test data, the reproduction of any evaluation which
+\emph{does} make use of test data is tricky at best and intractable to
+impossible at worst.
+\par
+
+The conceit of this work is that if real-world test data cannot be found,
+perhaps it can be sufficiently well faked. This paper introduces an alternative
+approach to business process modelling using \emph{dynamic fuzzing}, an
+experimental software engineering paradigm. We show that this approach
+substantiates an alternative paradigm for business process modelling, and
+discuss the ways by which a dynamic fuzzing approach might augment current
+efforts in the BPMDS community to synthesise event log data which can plausibly
+be described as ``realistic''. Realism is introduced to the model by simulating
+flaws in the real-world execution of a business process, contingent on
+properties of both the actor executing the business process and the
+environemntal concerns which might alter that actor's behaviour in ``noisy''
+ways.
+\par
+
+We assert that movement towards particularly realistic modelling makes possible
+the generation of controlled data sets which exhibit a variety of traits
+expected in the real world: noise, security violation, partial or missing log
+data, and other variation from the expected behaviour that one might anticipate
+in an empirical data set.
+\par
+
+\todo{I think it might make more sense to explore DF, then apply it to business
+  process modelling and explore it within the context of ``transformative
+  BPMDS'', and compare to existing methods and show that application of DF in
+  this field actually addresses a number of issues in the state of the art.
+  Possibly refactor the structure.}
+The next section discusses existing approaches to data synthesis; the methods
+are assessed and their flaws noted. Dynamic fuzzing is then examined as an
+approach, and the 
+
 
 
 \section{Current Methods}
@@ -64,7 +137,9 @@ Therefore, while this method shows initial promise, amending it to satisfy the
 requirement of realism in a generated event log seems intractable.
 \par
 
-\subsection{IBM paper}  % What's the name of this actual technique? TODO: Re-read the paper...
+\subsection{Generating Business Process Variants}  % What's the name of this actual technique? TODO: Re-read the paper...
+Similar work has been undertaken by researchers at SAP and Ryerson University,
+Canada. Researchers 
 
 \subsection{Limitations of these Approach}
 The limitation of this approach is evident when we consider what the impact of
