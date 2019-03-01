@@ -1,0 +1,78 @@
+\documentclass[draft,12pt]{article}
+
+\include{prelude}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Science requires data. Some work exists toward producing synthetic data sets
+for testing information systems in a controlled way, but never addresses
+whether the data sets are representative of the real world. To produce data
+sets that can plausibly be described as ``realistic'', we note that it is
+necessary to account for unexpected behaviours which produce noise in
+empirically sourced data sets. We present a novel approach to simulation,
+where variance in behaviour is captured as a component of a model, and used to
+introduce errors in the behaviour represented by such a model. These possibly
+erroneous behaviours are simulated, introducing realistic noise to generated
+data sets. To achieve this, a new paradigm for the construction of business
+process models is introduced. Implementation of models under this new paradigm
+is detailed in full. The paradigm lends a new perspective on modelling with
+impacts on the broader BPMDS community, and this future work is discussed.
+\end{abstract}
+
+
+
+
+\section{Designing with Synthetic Data}
+% There's some techniques at the moment for designing with synthetic data: secsy
+% and the sap paper. They give us a kind of feedback loop, in that they give us
+% a way to generate data with the intention of designing a scientific experiment
+% or an industrial tool which can be tested. So, we get our standard feedback
+% loop by inferring from their process.
+
+% More than that, we can infer from their work that the feedback loop we
+% proposed in the meeting makes sense --- they motivate that feedback loop by
+% either asserting it exists and improving it with their work, or making it
+% possible. Maybe?
+
+% Once we've got *their* feedback loop, we can assert that the loop has a flaw:
+% it doesn't deal with emergent properties in an especially good way. We can do
+% better. 
+Controlled, representative data is important in a variety of areas, for a
+variety of reasons. Scientists require controlled data to run experiments with.
+Industry requires data for the improvement of products, services and internal
+processes.
+\par
+
+Data for business processes with these properties can be difficult to obtain.
+As in any complex system, data generated from one business process is often
+incomparable with another, because small emergent phenomena can exert massive
+effects on the output of the 
+\par
+
+
+\section{Better Feedback Loops}
+The knock-on effects of variance in empirical processes presents an issue for
+the existing paradigm, and simulating these knock-on effects is key to using
+these models for realistic synthesis. This critical flaw with the design of
+these feedback loops can be fixed by a focus on improving the way in which the
+models used in the loops reflect the real world.
+\par
+
+
+
+\section{Generating Plausibly Real Synthetic Data}
+
+
+
+\section{Further notes on Dynamic Fuzzing}
+
+
+
+
+\section{Existing Synthetic Data with Variance Techniques}
+
+% SecSY, SAP paper
+
+

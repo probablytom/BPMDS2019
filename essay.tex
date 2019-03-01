@@ -149,12 +149,14 @@ requirement of realism in a generated event log seems intractable.
 Similar work has been undertaken by researchers at SAP and Ryerson University,
 Canada. Researchers 
 
-\subsection{Limitations of these Approach}
-The limitation of this approach is evident when we consider what the impact of
-contingent behaviour is on certain details of the world they are intended to
-simulate. In the real world, the changes applied in ordinary process structure
-tree models fail to represent how changes at one stage in a procedure impact
-future behaviour.\par
+\subsection{Limitations of these Approaches}
+\label{subsec:existing_work_limitations}
+
+The limitation of this
+approach is evident when we consider what the impact of contingent behaviour is
+on certain details of the world they are intended to simulate. In the real
+world, the changes applied in ordinary process structure tree models fail to
+represent how changes at one stage in a procedure impact future behaviour.\par
 
 A toy example of the real world might be a worker following a simple workflow on
 a factory floor. The worker's workflow can be represented through a plethora of
@@ -172,8 +174,27 @@ Tree. \par
 
 \section{Dynamic Fuzzing}\label{sec:dynamic-fuzzing}
 
+Program fuzzing is an experimental software engineering paradigm where programs
+are rewritten during their execution. When program fuzzing is employed, a
+program segment\footnote{Typically a function or method.} is annotated with a
+second function, called a ``fuzzer''. When the original program segment is
+invoked, a high-level representation of the process it
+represents\footnote{Typically a graph representation, such as a segment of a
+  Finite State Automata or an Abstract Syntax Tree.} is delivered
+as an argument to the fuzzer, which returns an altered version of it to be run
+in lieu of the original. The interaction between original source and fuzzer can
+have a variety of nuances, which can influence the impact of dynamic fuzzing as
+a technique.
 
-\section{Implementations and Modelling}\label{sec:implementations-and-modelling}
+\begin{description}
+  \item[Fuzzer] Fuzzer definition
+  \item[]
+  
+\end{description}
+
+
+\section{Implementations and Modelling}
+\label{sec:implementations-and-modelling}
 
 
 
