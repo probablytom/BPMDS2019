@@ -403,6 +403,53 @@ iterative improvement of the new proposed components.
 \section{Next Steps}
 \label{sec:future_work}
 \label{sec:conclusion}
+The proposed paradigm shows promise, but requires experimental validation.
+\par
+
+Some experimental validation can be found in \cite{wallis2018modelling}. A model
+of software engineers working under different paradigms was developed so as to
+model the impact of distraction on the workers' productivity, using Dynamic
+Fuzzing via PyDySoFu's implementation via direct source code fuzzing. Further
+case studies such as these, ideally verified against empirical data, is
+necessary for a full validation of the technique via case study analysis.
+\par
+
+An alternative angle for validating the paradigm would be to generate realistic
+event logs, and to evaluate them by identifying expected emergent properties in
+the synthetic data. This approach is similar to \cite['s]{accorsi2013secsy}
+evaluation. Work toward employing this evaluation technique is underway, where
+the BPI 2013 challenge model\todo{cite?} is being rewritten using Dynamic
+Fuzzing, and emergent security vulnerabilities identified via
+STS-Tool\cite{salnitri2015sts}.
+\par
+
+Other approaches which could prove fruitful might involve the integration of the
+paradigm into more typical workflow modeling practices. For example, executable
+BPMN definitions\cite{mitsyuk2017generating} may benefit for such an approach,
+especially considering that data synthesis is a target use case for the work.
+Petri nets are swiftly becoming the de facto implementation underlying workflow
+modeling and process mining\todo{Maybe cite van der aalst's PhD thesis? It's
+  what's responsible for this situation, after all\ldots{}}, and an
+implementation of Dynamic Fuzzing which operates over a Petri Net should be
+feasible, given that Petri Nets are also graph representations of workflow
+models. 
+\par
+
+Such an approach could permit future work which tackles a formal verification of
+a fuzzer's ``safety'': careless transformations on a graph might cause semantic
+inconsistencies which could invalidate the model with respect to its
+subject\todo{clumsy. Refactor this sentence? Maybe Tim knows a better way to
+  phrase this!}. Semantic consistency and general fuzzer ``safety'' is an area
+of research which requires much exploration.
+\par
+
+The paradigm proposed represents a shift in what models are able to capture,
+and, as a result, the strength of general BPMDS practices. The capture of
+information within a model, as well as foundational\todo{sp?} improvements
+to design and support practices, make just-in-time insertion of behavioral
+variance via dynamic fuzzing a promising avenue of research for the BPMDS
+community, in particular its growing cohort with interest in data synthesis.
+\par
 
 
 
