@@ -234,13 +234,14 @@ action to be executed in the workflow, called \texttt{select\_successor}, execut
 a process in the graph can be achieved using the following procedure:
 \par
 
-\begin{algorithm}
-  curr_node = s
-  while type of curr_node is not EndNode:
-    execute_process curr_node 
-    curr_node = ( select_successor curr_node ) 
-\end{algorithm}
-
+\begin{figure}[H]
+  \begin{algorithm}
+    curr_node = s
+    while type of curr_node is not EndNode:
+      execute_process curr_node
+      curr_node = ( select_successor curr_node )
+  \end{algorithm}
+\end{figure}
 \todo{The following log example can probably be deleted for space, or just
   explained succinctly}
 
@@ -249,14 +250,15 @@ modification to suit the needs of a given model. For example, a version of the
 procedure which produces an event log as output, assuming a function which adds
 a process to an event log called \texttt{log}, might be implemented as:
 
-\begin{algorithm}
-  curr_node = s
-  while type of curr_node is not EndNode:
-    execute_process curr_node
-    log curr_node 
-    curr_node = ( select_successor curr_node ) 
-\end{algorithm}
-
+\begin{figure}[H]
+  \begin{algorithm}
+    curr_node = s
+    while type of curr_node is not EndNode:
+      execute_process curr_node
+      log curr_node
+      curr_node = ( select_successor curr_node )
+  \end{algorithm}
+\end{figure}
 \subsection{Implementing Dynamic Fuzzing}
 \label{subsec:example_implementation_details}
 With a representation of a process such as this, dynamic fuzzing can be
@@ -279,15 +281,13 @@ graph \rightarrow workflow\_graph$\footnote{The use of \texttt{map} here
 apply any inversions of previous fuzzings, $apply\_inverses$. This gives a
 trivial application of dynamic fuzzing:
 
-\begin{algorithm}
-  curr_node = s
-  while type of curr_node is not EndNode:
-    G = ( total_fuzz curr_node G )
-    execute_process curr_node 
-    G = ( apply_inverses curr_node G )
-    curr_node = ( select_successor curr_node ) 
-\end{algorithm}
-
+\begin{figure}[H]
+  \begin{algorithm}
+    curr_node = s while type of curr_node is not EndNode: G = ( total_fuzz
+    curr_node G ) execute_process curr_node G = ( apply_inverses curr_node G )
+    curr_node = ( select_successor curr_node )
+  \end{algorithm}
+\end{figure}
 By applying inverses associated with the current node, previous fuzzings can be
 reset at the point at which they are no longer required, such as when the
 current node is no longer within the region of the graph the given fuzzer should
@@ -295,6 +295,23 @@ be applied to. Before and every execution of a part of a business process
 associated with a node, the graph representing the workflow $G$ is replaced with
 an updated variant, with the appropriate modifications representing real-world
 variance applied or removed.
+\par
+
+\subsection{Existing implementations}
+Working implementations of Dynamic Fuzzing which can be immediately used for
+modeling purposes exist, using a different technique to that described in
+\cref{subsec:example_implementation_details}. PyDySoFu\citep{pdsf} is a tool
+which dynamically alters Python source code via a tree
+representation\footnote{Specifically, PyDySoFu dynamically alters the abstract
+  syntax tree associated with Python code, using aspect orientation to decouple
+  behavioral variance --- described as a graph transform --- from behaviour
+  specification --- described as a Python program simulating expected
+  behaviour}. Where models are implemented as simulations in Python, PyDySoFu
+provides a mechanism for just-in-time insertion of behavioral variance in a
+model. However, the authors doubt that this low-level implementation is not
+immediately familiar to those in the workflow modeling community, hence the
+alternative approach described here. Use of PyDySoFu for workflow modeling is
+described in \cite{wallis2018modelling}.
 \par
 
 \section{Dynamic Fuzzing as a Modeling Paradigm}
@@ -307,7 +324,8 @@ Particularly, in this section we show that dynamic fuzzing can\ldots{}
 \begin{itemize}
 \item Produce a realistic event log, complete with knock-on effects of
   behavioral variance
-\item Support the construction of models simple enough to develop tractably
+\item Support the construction of models simple enough to design and support
+  tractably
 \item Support the feedback loop mentioned in \cref{sec:intro}
 \end{itemize}
 
@@ -315,21 +333,77 @@ Particularly, in this section we show that dynamic fuzzing can\ldots{}
 subsections.
 
 \subsection{Production of realistic event logs}
+Use of dynamic fuzzing permits just-in-time insertion of behavioral variance in
+a model, which provides the benefits of modeling knock-on effects and
+dynamically altering the existence --- and impact --- of variance on the model.
+\par
+
+Inclusion of knock-on effects on the model, rather than inserting the immediate
+effects of variance, overcomes the weaknesses identified in post-simulation
+insertion of variance used in \cite{accorsi2013secsy}. Meanwhile, dynamically
+altering the nature, impact and existence of variance on a model by making its
+manifestation dependent on the state of a simulation mitigates the issues
+identified with the pre-simulation insertion of variance identified in
+\cite{pourmasoumi2015business}.
+\par
+
+As a result, the BPMDS paradigm dynamic fuzzing permits allows for models which
+can be made more realistic than its pre-- and post-- insertion alternatives.
+\par
 
 
-\subsection{Construction of tractable models}
+\subsection{Tractably design-able and support-able models}
+Models which can be designed and supported tractably should be small enough to
+maintain, without sacrificing the complexity they may capture.
+\par
 
+Ideal behavior is specified using dynamic fuzzing by employing familiar workflow
+modeling techniques. This ``blueprint'' of expected behavior is then enhanced
+using descriptions of realistic variance separately to the original model. Model
+size should be expected to grow slowly with the added complexity of variance in
+this way: separation of concerns is a proven way to capture added complexity in
+concise, yet expressive ways\citep{kiczales1997aspect}.
+\par
+
+This technique has been successfully demonstrated in \cite{wallis2018modelling},
+where software development methodologies were modeled and analyzed as an
+evaluation of the approach for the development of tractably sized models.
+Therefore, models can be expected to grow simply and maintain clarity by
+employing the same rationale as well-studied software engineering practices.
+\par
 
 \subsection{Feedback loop support}
+The feedback loop described in \cref{sec:intro}\todo{Change to reference to a
+  figure?} relies on the availability of data for rapid prototyping of a
+business process, and the design and support of such a business process.
+\par
+
+Modeling improvements such as Dynamic Fuzzing permit more realistic data which
+can be added to the aforementioned feedback loop, improving the overall efficacy
+of standard design and engineering practices in BPMDS. Furthermore, the paradigm
+dynamic fuzzing permits hints at an improved feedback loop for business process
+design and support, where models are influenced by the analysis of the data they
+produce \emph{as well as specification of properties such as variance}. 
+\par
+
+\todo{diagram here}
+
+As this feedback loop iteratevely improves not only the business process model,
+but the specification of its variance also, this feature of the proposed
+paradigm can be expected to enhance the realism of the model further via the
+iterative improvement of the new proposed components.
+\par
 
 
+% By following the procedure employed in
+% \cref{subsec:example_implementation_details}, we achieve a graph-like fuzzing
+% paradigm trivially compatible with literature on block-structured processes as
+% defined in \cite{li2010mining}, as well as petri-net models and similar.
 
-By following the procedure employed in
-\cref{subsec:example_implementation_details}, we achieve a graph-like fuzzing
-paradigm trivially compatible with literature on block-structured processes as
-defined in \cite{li2010mining}, as well as petri-net models and similar.
+\section{Next Steps}
+\label{sec:future_work}
+\label{sec:conclusion}
 
-\
 
 
 \bibliography{lib}
