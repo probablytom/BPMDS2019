@@ -1,4 +1,4 @@
-\documentclass[12pt]{llncs}  % TODO: download template, What's the
+\documentclass[draft,12pt]{llncs}  % TODO: download template, What's the
                                      % actual space like?
 \include{prelude}
 
@@ -9,48 +9,34 @@
 \section{A Requirement for Data}
 \label{sec:intro}
 
-% There's a feedback loop to design via modelling
+\todo{I feel like I don't make a very good case for the feedback loop here.
+  Would like to go over this with Tim.}
 
-% This feedback loop must be fed data!
-
-% The feedback loop is really useful:
-% - Used to test tools
-% - Used to test models before deployment
-% - Used in science for things like noise reduction on empirical datasets
-
-
-% We need to generate it.
-% - Data's hard to find
-% - People are generating more and more sophisticated synthetic datasets
-% implication: there's a need to generate realistic data.
-
-Business process design is a field which, when treated properly, has an impact
-on the world which can be difficult to overstate. With a strong economic
-importance and the possibility of affecting the jobs and incomes of real people,
-the \emph{design} of a business process has to be given serious attention: work
-which is undertaken without care, or with inadequate tooling, can have moral
-consequences. Equally, when undertaken properly, it can have a positive effect
-economically and on the people it concerns.
+Business process design is a field with high real-world impact. With a strong
+economic importance and the possibility of affecting the jobs and incomes of
+real people, the \emph{design} of a business process has to be given serious
+attention: work which is undertaken without care, or with inadequate tooling,
+can have moral consequences. Equally, when undertaken properly, it can have a
+positive effect economically and on the people it concerns.
 \par
 
 With this in mind, a standard experimental paradigm extends to the treatment of
-business processes nicely. Models are constructed; initial design decisions are
+business processes. Models are constructed; initial design decisions are
 taken in this modelling process. Models then produce data, which is summarised
-into metrics of performance: the model can be analyses via these metrics, and
-tweaks made until the design it represents is satisfactory.
+into metrics of performance: the model can be analyzed via these metrics, and
+tweaks can be made until the design it represents is satisfactory.
 \par
 
 \todo{insert a figure representing this.}
 
-This procedure is reliant on available data in a number of ways. The initial
-model must be constructed from a given understanding of what the desired process
-is composed of, for example. In the case of modeling existing processes, the
-initial model could be derived from empirical data sets. The model also
-generates data, the quality of which is key to producing useful analyses. So
+This procedure is reliant on available data in a number of ways. First, the
+initial model must be constructed from a given understanding of what the desired
+process is composed of. In the case of modeling existing processes,
+the initial model could be derived from empirical data sets. The model also
+generates data, the quality of which are key to producing useful analyses. So
 long as the original model is sound, produces sound data, and produces data from
 which sound measurements might be performed, a feedback loop is constructed
-which can continually find improvements to the model's design.
-\par
+which can continually find improvements to the model's design. \par
 
 This feedback loop is useful in both industry and in science. Such a practice is
 capable of testing tools produced in both contexts, by way of producing and
@@ -74,15 +60,17 @@ workable.
 Importantly, it is necessary to \emph{generate} the data involved in this
 procedure. This stems from two observations: firstly, empirical data is
 difficult for one to collect without direct access to a model's subject process,
-and secondly, when this data \emph{is} collected, it is typically silo-ed into
-the organization which collected it, as the collection takes resources and the
-data contained may not be suitable for public dissemination\footnote{It can, for
-  example, contain trade secrets.}. Therefore, work in \emph{synthesizing}
-realistic data may reduce the cost of data acquisition, and --- where acquisition is
-not possible --- may make data readily available, enabling a greater number of
-practitioners to make use of the above technique.
+and secondly, when this data \emph{is} collected, it is typically privately held
+in the organization which collected it, as the collection takes resources and
+the data contained may not be suitable for public dissemination.
+% \footnote{It can, for example, contain trade secrets.}
+Therefore, work in \emph{synthesizing} realistic data may reduce the cost of
+data acquisition, and --- where acquisition is not possible --- may make data
+readily available, enabling a greater number of practitioners to make use of the
+above technique. The need for this has been established in similar work
+involving the synthesis of generated
+data~\citep{accorsi2013secsy,pourmasoumi2015business,mitsyuk2017generating}.
 \par
-
 
 
 \section{Current Methods in Generating Data}
@@ -93,7 +81,7 @@ complex systems, producing a realistic model requires capturing nuanced data
 about the subject process.
 \par
 
-The concern of this article is the effect unexpected variation in behaviour can
+The concern of this article is the effect unexpected variation in behavior can
 have on the data generated by simulation, and the presentation of methods to
 better employ such phenomena as a component of the model so as to improve the
 quality of the data it produces.
@@ -119,14 +107,14 @@ alterations post-hoc, to represent the effect of behavioral variance.
 
 This approach satisfies the authors' goals of producing logs which represent the
 violation of a security policy, but the narrow focus of the work has
-consequences for its generality. For example, the modifications developed for
-SecSY are largely security-oriented and do not serve a general-purpose use case.
-Behavioural variance as usually seen in business process execution, such as an
+consequences for its generality. The modifications developed for SecSY are
+largely security-oriented and do not serve a general-purpose use case.
+Behavioral variance as usually seen in business process execution, such as an
 overconfident or distracted employee, would be complex to represent in such a
 way.
 \par
 
-More importantly, the approach --- inserting the effect of variance to a log
+More importantly, the approach --- inserting the effect of variance in a log
 generated via a simulated run of a business process --- cannot take into account
 the impact of knock-on effects from an initial lapse. For example, an
 under-confident employee might decide to repeat an action, which can appear in
@@ -141,7 +129,7 @@ In other words, the choice to alter one part of a workflow can have consequences
 elsewhere; because post-simulation insertion of variance is concerned with only
 the initial workflow variance, and the relationship of affected steps with
 respect to other actors and the rest of the workflow is unclear from an event
-log, it is not possible to make \emph{realistic} adjustments to an event log
+log, it is not feasible to make \emph{realistic} adjustments to an event log
 after simulation.
 \par
 
@@ -161,12 +149,13 @@ defining transformation functions over them~\citep{li2010mining}. These can be c
 eventually represent significant changes to the original process.\par
 
 This approach solves the problem of emulating knock-on effects in event logs, as
-the simulation of the business process producing an event log must take the
-variance into account. Limiting the approach is a reliance on process structure
-trees: real-world variance can be complex to model, and representing changes to
-processes as low-level changes to mathematical structures make them
-tine-consuming to produce. Moreover, real-world systems are complex and their
-variance nuanced, making a low-level representation ill-suited.
+the simulation of the business process producing an event log must take the any
+past effects of variance into account. Limiting the approach is a reliance on
+process structure trees: real-world variance can be complex to model, and
+representing changes to processes as low-level changes to mathematical
+structures make them tine-consuming to produce. Moreover, real-world systems are
+complex and their variance nuanced, making a low-level representation
+ill-suited.
 \par
 
 Finally, a feature of real-world variance is that processes are not dynamic:
@@ -174,10 +163,12 @@ they evolve over time, and part of the variance of a process is that actor-level
 and environmental aspects of the model can alter the structure of the business
 process from one moment to the next. While this can in theory be represented by
 a very large business process model with all possible paths at all points in
-time, at scale this should produce an intractably large model. More importantly,
-the variance may non-deterministically determine what the model looks like at a
+time, at scale this will produce an intractably large model. More importantly,
+the variance may non-deterministically affect what the model looks like at a
 future point in time, and scenarios like these cannot be embedded in the model
-before it is run.
+before it is run. Accurate simulation of behavioral variance include how the
+behaviors \emph{change}; ``realistic'' models should therefore be dynamically
+self-modifying.
 \par
 
 
@@ -189,14 +180,14 @@ variance is to describe such a variance as a process change which is applied
 during the simulation of the original business process.
 \par
 
-Depending on the implementation of such a technique, it can be more high-level
-than something dependent on process structure trees, while retaining the
-benefits of pre-simulation insertion of variance: knock-on effects from
-simulation are retained, high-level descriptions of variance are possible, and
-models remain tractably small, as model variation can be inserted and removed as
-it is required. In addition, the approach offers dynamic restructuring of
-business processes, matching what a participant in a real-world business process
-observes and allowing for non-deterministic process definition.
+Depending on the implementation of such a technique, it can represent variance
+at a more high-level than something dependent on process structure trees, while
+retaining the benefits of pre-simulation insertion of variance: knock-on effects
+from simulation are retained, yet high-level descriptions of variance are
+possible, and models remain tractably small, as model variation can be inserted
+and removed as it is required. In addition, the approach offers dynamic
+restructuring of business processes, matching what a participant in a real-world
+business process observes and allowing for non-deterministic process definition.
 \par
 
 \section{A primer on Dynamic Fuzzing}
@@ -209,11 +200,11 @@ strengths are explored in \cref{sec:dynamic_fuzzing_benefits}.
 \par
 
 Achieving mid-execution transformation of processes can be achieved in various
-ways. For example, actively developed tools~\citep{pdsf} edit Python code during
-execution by way of applying transformations to the program's abstract syntax
-tree. For the purposes of this explanation, a new approach is proposed, intended
-to reflect paradigms popular in the modern workflow modeling community. A
-reference tool for this is currently in development~\citep{workflowgraphs}.
+ways. For example, actively developed tools~\citep{pdsf} change the source code
+of a program while it executes. For the purposes of this explanation, a new
+approach is proposed, intended to reflect paradigms popular in the modern
+workflow modeling community. A reference tool for this is currently in
+development~\citep{workflowgraphs}.
 
 \subsection{Workflow representation}
 Before building a conceptual framework for mid-execution alteration of a
@@ -222,10 +213,10 @@ process, we will first define our workflow meta-model\todo{I \emph{think} this
 \par
 
 Let us represent a workflow as a directed graph $G=\{V, E\}$, with entry point
-to the workflow defined as a starting node $s \in{} V$ where each node on the graph
+to the workflow defined as a starting node, $s \in{} V$, and a set of nodes to end
+a graph traversal on, $E \in G$, where each node on the graph
 represents an activity in the workflow of a business process. Edges on this
-graph represent possible future actions after the completion of their
-predecessor in the modeled business process.
+graph represent possible future actions after the completion of the edge's origin.
 \par
 
 Assuming some function which executes any associated business process for a
@@ -237,9 +228,9 @@ a process in the graph can be achieved using the following procedure:
 \begin{figure}[H]
   \begin{algorithm}
     curr_node = s
-    while type of curr_node is not EndNode:
-      execute_process curr_node
-      curr_node = ( select_successor curr_node )
+    while curr_node $\notin{} E$:
+        execute_process curr_node
+        curr_node = ( select_successor curr_node )
   \end{algorithm}
 \end{figure}
 \todo{The following log example can probably be deleted for space, or just
@@ -247,16 +238,16 @@ a process in the graph can be achieved using the following procedure:
 
 The simplicity of this approach assists in both easy implementation and
 modification to suit the needs of a given model. For example, a version of the
-procedure which produces an event log as output, assuming a function which adds
-a process to an event log called \texttt{log}, might be implemented as:
+procedure which produces an event log as output, assuming a function called
+\texttt{log} which adds a process to an event log, might be implemented as:
 
 \begin{figure}[H]
   \begin{algorithm}
     curr_node = s
-    while type of curr_node is not EndNode:
-      execute_process curr_node
-      log curr_node
-      curr_node = ( select_successor curr_node )
+    while curr_node $\notin{} E$:
+        execute_process curr_node
+        log curr_node
+        curr_node = ( select_successor curr_node )
   \end{algorithm}
 \end{figure}
 \subsection{Implementing Dynamic Fuzzing}
@@ -265,7 +256,7 @@ With a representation of a process such as this, dynamic fuzzing can be
 implemented with ``fuzzers'', which define the transformation on the workflow
 as a graph transformation. Informally, the type of a fuzzer is $fuzzer ::
 workflow\_graph \rightarrow workflow\_graph$. Let us assume all fuzzers have inverse
-functions which undo their effects, $f_i$.
+functions which undo their effects, denoted $f_i$.
 \par
 
 Assume mappings \(v \in V, f(v)=F_v, i(v)=F_{v_i}\) where $f$ associates some
@@ -274,24 +265,26 @@ mapping to collect the inverses of these fuzzers into a set of fuzzer inverses
 mapped to the current node $F_{v_i}$. The graph transform takes and returns a
 graph, meaning that the functions can be chained together, having equivalent
 input and output types. We can therefore define a point-free function
-$total\_fuzz~v = map~f(v)$ of type $total\_fuzz :: vertex \rightarrow workflow
-graph \rightarrow workflow\_graph$\footnote{The use of \texttt{map} here
-  collects the set of fuzzers for $v$, $F_v$, and chains them together to be
-  applied to some input workflow graph.}, and a similarly defined function to
-apply any inversions of previous fuzzings, $apply\_inverses$. This gives a
-trivial application of dynamic fuzzing:
+$total\_fuzz~v = \circ\{f(v)\}$ of type $total\_fuzz :: vertex \rightarrow
+workflow\_graph \rightarrow workflow\_graph$\footnote{By $\circ\{f(v)\}$, we
+  intend the composition of all functions in the set $f(v)$.}, and a similarly
+defined function to apply any inversions of previous fuzzings,
+$apply\_inverses$. This gives a trivial application of dynamic fuzzing:
 
 \begin{figure}[H]
   \begin{algorithm}
-    curr_node = s while type of curr_node is not EndNode: G = ( total_fuzz
-    curr_node G ) execute_process curr_node G = ( apply_inverses curr_node G )
-    curr_node = ( select_successor curr_node )
+    curr_node = s
+    while curr_node $\notin{} E$:
+        G = ( total_fuzz curr_node G )
+        execute_process
+        curr_node G = ( apply_inverses curr_node G )
+        curr_node = ( select_successor curr_node )
   \end{algorithm}
 \end{figure}
 By applying inverses associated with the current node, previous fuzzings can be
 reset at the point at which they are no longer required, such as when the
 current node is no longer within the region of the graph the given fuzzer should
-be applied to. Before and every execution of a part of a business process
+be applied to. Before and after every execution of a part of a business process
 associated with a node, the graph representing the workflow $G$ is replaced with
 an updated variant, with the appropriate modifications representing real-world
 variance applied or removed.
@@ -304,22 +297,21 @@ modeling purposes exist, using a different technique to that described in
 which dynamically alters Python source code via a tree
 representation\footnote{Specifically, PyDySoFu dynamically alters the abstract
   syntax tree associated with Python code, using aspect orientation to decouple
-  behavioral variance --- described as a graph transform --- from behaviour
+  behavioral variance --- described as a graph transform --- from behavior
   specification --- described as a Python program simulating expected
-  behaviour}. Where models are implemented as simulations in Python, PyDySoFu
+  behavior}. Where models are implemented as simulations in Python, PyDySoFu
 provides a mechanism for just-in-time insertion of behavioral variance in a
-model. However, the authors doubt that this low-level implementation is not
+model. However, the authors doubt that this low-level implementation is
 immediately familiar to those in the workflow modeling community, hence the
-alternative approach described here. Use of PyDySoFu for workflow modeling is
-described in \cite{wallis2018modelling}.
+alternative approach described here. Use of PyDySoFu for dynamic fuzzing in
+workflow modeling is described in \cite{wallis2018modelling}.
 \par
 
 \section{Dynamic Fuzzing as a Modeling Paradigm}
 \label{sec:dynamic_fuzzing_benefits}
 The conceit of this section is that, properly employed, dynamically fuzzed
 programs can express realistic models of business processes with variance.
-Particularly, in this section we show that dynamic fuzzing can\ldots{}
-\par
+Particularly, in this section we show that dynamic fuzzing can:
 
 \begin{itemize}
 \item Produce a realistic event log, complete with knock-on effects of
@@ -335,16 +327,21 @@ subsections.
 \subsection{Production of realistic event logs}
 Use of dynamic fuzzing permits just-in-time insertion of behavioral variance in
 a model, which provides the benefits of modeling knock-on effects and
-dynamically altering the existence --- and impact --- of variance on the model.
+dynamically altering the existence and impact of variance on the model.
 \par
 
 Inclusion of knock-on effects on the model, rather than inserting the immediate
 effects of variance, overcomes the weaknesses identified in post-simulation
-insertion of variance used in \cite{accorsi2013secsy}. Meanwhile, dynamically
-altering the nature, impact and existence of variance on a model by making its
-manifestation dependent on the state of a simulation mitigates the issues
-identified with the pre-simulation insertion of variance identified in
-\cite{pourmasoumi2015business}.
+insertion of variance used in \cite{accorsi2013secsy}. This is a result of
+knock-on effects from one stage of a simulation being taken into account in
+later stages of the simulation as they can alter the state of the model
+mid-execution.
+\par
+
+Meanwhile, dynamically altering the nature, impact and existence of variance on
+a model by making its manifestation dependent on the state of a simulation
+mitigates the issues identified with the pre-simulation insertion of variance
+identified in \cite{pourmasoumi2015business}.
 \par
 
 As a result, the BPMDS paradigm dynamic fuzzing permits allows for models which
@@ -362,7 +359,7 @@ modeling techniques. This ``blueprint'' of expected behavior is then enhanced
 using descriptions of realistic variance separately to the original model. Model
 size should be expected to grow slowly with the added complexity of variance in
 this way: separation of concerns is a proven way to capture added complexity in
-concise, yet expressive ways\citep{kiczales1997aspect}.
+concise, yet expressive ways~\citep{kiczales1997aspect}.
 \par
 
 This technique has been successfully demonstrated in \cite{wallis2018modelling},
@@ -373,7 +370,7 @@ employing the same rationale as well-studied software engineering practices.
 \par
 
 \subsection{Feedback loop support}
-The feedback loop described in \cref{sec:intro}\todo{Change to reference to a
+The feedback loop described in \cref{sec:intro}~\todo{Change to reference to a
   figure?} relies on the availability of data for rapid prototyping of a
 business process, and the design and support of such a business process.
 \par
@@ -389,9 +386,9 @@ produce \emph{as well as specification of properties such as variance}.
 \todo{diagram here}
 
 As this feedback loop iteratevely improves not only the business process model,
-but the specification of its variance also, this feature of the proposed
+but also the specification of its variance, this feature of the proposed
 paradigm can be expected to enhance the realism of the model further via the
-iterative improvement of the new proposed components.
+iterative improvement of both behavior and variance.
 \par
 
 
@@ -403,10 +400,11 @@ iterative improvement of the new proposed components.
 \section{Next Steps}
 \label{sec:future_work}
 \label{sec:conclusion}
-The proposed paradigm shows promise, but requires experimental validation.
+The proposed paradigm shows promise, but requires further experimental
+validation.
 \par
 
-Some experimental validation can be found in \cite{wallis2018modelling}. A model
+Some such validation can be found in \cite{wallis2018modelling}. A model
 of software engineers working under different paradigms was developed so as to
 model the impact of distraction on the workers' productivity, using Dynamic
 Fuzzing via PyDySoFu's implementation via direct source code fuzzing. Further
@@ -416,16 +414,16 @@ necessary for a full validation of the technique via case study analysis.
 
 An alternative angle for validating the paradigm would be to generate realistic
 event logs, and to evaluate them by identifying expected emergent properties in
-the synthetic data. This approach is similar to \cite['s]{accorsi2013secsy}
+the synthetic data. This approach is similar to~\cite{accorsi2013secsy}
 evaluation. Work toward employing this evaluation technique is underway, where
 the BPI 2013 challenge model\todo{cite?} is being rewritten using Dynamic
 Fuzzing, and emergent security vulnerabilities identified via
-STS-Tool\cite{salnitri2015sts}.
+STS-Tool~\citep{salnitri2015sts}.
 \par
 
 Other approaches which could prove fruitful might involve the integration of the
 paradigm into more typical workflow modeling practices. For example, executable
-BPMN definitions\cite{mitsyuk2017generating} may benefit for such an approach,
+BPMN definitions~\citep{mitsyuk2017generating} may benefit for such an approach,
 especially considering that data synthesis is a target use case for the work.
 Petri nets are swiftly becoming the de facto implementation underlying workflow
 modeling and process mining\todo{Maybe cite van der aalst's PhD thesis? It's
@@ -434,6 +432,10 @@ implementation of Dynamic Fuzzing which operates over a Petri Net should be
 feasible, given that Petri Nets are also graph representations of workflow
 models. 
 \par
+
+\todo{TODO: write a little about possible automata work designing safe and
+  formal rewrites of the graph. Plenty of sexy maths-y stuff we haven't done
+  that somebody could. Temporal graphs etc.}
 
 Such an approach could permit future work which tackles a formal verification of
 a fuzzer's ``safety'': careless transformations on a graph might cause semantic
@@ -451,7 +453,8 @@ variance via dynamic fuzzing a promising avenue of research for the BPMDS
 community, in particular its growing cohort with interest in data synthesis.
 \par
 
-
+\section*{Acknowledgements}
+The authors would like to thank OBASHI Technology for helping to fund this work.
 
 \bibliography{lib}
 \end{document}
